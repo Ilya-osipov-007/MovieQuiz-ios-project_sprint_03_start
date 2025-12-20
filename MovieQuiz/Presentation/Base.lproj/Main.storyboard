@@ -26,12 +26,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="REt-hC-67A">
-                                <rect key="frame" x="20" y="60" width="374" height="786"/>
+                                <rect key="frame" x="20" y="60" width="374" height="802"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lwh-ib-dpx">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="23.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Вопрос:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HB3-fM-Huw" userLabel="Question Title Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" text="Вопрос:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HB3-fM-Huw" userLabel="Question Title Label">
                                                 <rect key="frame" x="0.0" y="0.0" width="338" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <color key="textColor" name="YP White"/>
@@ -48,28 +48,30 @@
                                             <constraint firstAttribute="width" constant="374" id="odQ-CZ-f76"/>
                                         </constraints>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Deadpool" translatesAutoresizingMaskIntoConstraints="NO" id="BZ8-4W-1CW" userLabel="Preview Image">
-                                        <rect key="frame" x="0.0" y="52.5" width="374" height="561"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Deadpool" translatesAutoresizingMaskIntoConstraints="NO" id="BZ8-4W-1CW" userLabel="Preview Image">
+                                        <rect key="frame" x="0.0" y="43.5" width="374" height="561"/>
                                         <color key="backgroundColor" name="YP White"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="BZ8-4W-1CW" secondAttribute="height" multiplier="2:3" id="nw6-ha-WQF"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше, чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWY-YQ-exP" userLabel="Question Label">
-                                        <rect key="frame" x="0.0" y="643" width="374" height="54"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше, чем 5?" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWY-YQ-exP" userLabel="Question Label">
+                                        <rect key="frame" x="0.0" y="624.5" width="374" height="97.5"/>
+                                        <rect key="contentStretch" x="0.80000000000000004" y="0.0" width="1" height="1"/>
                                         <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="23"/>
                                         <color key="textColor" name="YP White"/>
                                         <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="724" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Be6-2a-bwM">
-                                        <rect key="frame" x="0.0" y="726" width="374" height="60"/>
+                                    <stackView opaque="NO" contentMode="scaleAspectFill" horizontalCompressionResistancePriority="724" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Be6-2a-bwM">
+                                        <rect key="frame" x="0.0" y="742" width="374" height="60"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lg6-lo-eqH" userLabel="No button">
-                                                <rect key="frame" x="0.0" y="0.0" width="157" height="60"/>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lg6-lo-eqH" userLabel="No button">
+                                                <rect key="frame" x="0.0" y="0.0" width="177" height="60"/>
                                                 <color key="backgroundColor" name="YP White"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="4fU-h3-n1G"/>
-                                                    <constraint firstAttribute="width" constant="157" id="Y3z-k2-1qk"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="157" id="Y3z-k2-1qk"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -85,12 +87,12 @@
                                                     <action selector="noButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="89j-Ce-uGc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WC-mg-XVp" userLabel="Yes button">
-                                                <rect key="frame" x="217" y="0.0" width="157" height="60"/>
+                                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WC-mg-XVp" userLabel="Yes button">
+                                                <rect key="frame" x="197" y="0.0" width="177" height="60"/>
                                                 <color key="backgroundColor" name="YP White"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Nuf-4n-9hQ"/>
-                                                    <constraint firstAttribute="width" constant="157" id="SFI-w5-aUz"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="157" id="SFI-w5-aUz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -109,13 +111,16 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="BZ8-4W-1CW" firstAttribute="top" secondItem="Lwh-ib-dpx" secondAttribute="bottom" constant="20" id="oCp-ta-3h4"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="REt-hC-67A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Kh5-Lq-Qbn"/>
-                            <constraint firstItem="REt-hC-67A" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-50" id="mhV-Md-ON7"/>
+                            <constraint firstItem="REt-hC-67A" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-34" id="mhV-Md-ON7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="REt-hC-67A" secondAttribute="trailing" constant="20" id="nsK-pb-kXH"/>
                             <constraint firstItem="REt-hC-67A" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="zO1-Ox-rmp"/>
                         </constraints>
@@ -130,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-55.072463768115945" y="55.580357142857139"/>
+            <point key="canvasLocation" x="-20" y="70"/>
         </scene>
     </scenes>
     <resources>
