@@ -132,7 +132,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         noButton.isEnabled = false
     }
     
-    // приватный метод для показа результатов раунда квиза
+    // Приватный метод для показа алерта с результатами квиза
     // принимает вью модель QuizResultsViewModel и ничего не возвращает
     private func show(quiz result: QuizResultsViewModel) {
         let alert = UIAlertController(
