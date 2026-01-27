@@ -1,14 +1,9 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
-    // переменная с индексом текущего вопроса, начальное значение 0
-    // (по этому индексу будем искать вопрос в массиве, где индекс первого элемента 0, а не 1)
-    private var currentQuestionIndex = 0
     private let presenter = Presenter()
     private var alertPresenter = AlertPresenter()
     private var statisticService: StatisticServiceProtocol = StatisticService()
-    // переменная со счётчиком правильных ответов, начальное значение закономерно 0
-    private var correctAnswers = 0
     // приватный метод, который и меняет цвет рамки, и вызывает метод перехода
     // принимает на вход булевое значение и ничего не возвращает
     private func showAnswerResult(isCorrect: Bool) {
@@ -32,17 +27,17 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     // Приватный метод, который содержит логику перехода в один из сценариев
     // метод ничего не принимает и ничего не возвращает
     private func showNextQuestionOrResults() {
-        if currentQuestionIndex == questionsAmount - 1 {
+        if presenter.currentQuestionIndex == questionsAmount - 1 {
             let text = presenter.correctAnswers == 10 ?
                     "Поздравляем, вы ответили на 10 из 10!" :
-                    "Вы ответили на \(correctAnswers) из 10, попробуйте ещё раз!" // 1
+                    "Вы ответили на \(presenter.correctAnswers) из 10, попробуйте ещё раз!" // 1
             let viewModel = QuizResultsViewModel( // 2
                 title: "Этот раунд окончен!",
                 text: text,
                 buttonText: "Сыграть ещё раз")
             show(quiz: viewModel) // 3
         } else {
-            currentQuestionIndex += 1
+            presenter.currentQuestionIndex += 1
             questionFactory?.requestNextQuestion()
         }
     }
@@ -158,10 +153,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             guard let self = self else { return }
             // Вызываем метод презентера
             self.presenter.restartGame()
-            // Берем обновленные значения из презентера
-            self.currentQuestionIndex = self.presenter.currentQuestionIndex
-            self.correctAnswers = self.presenter.correctAnswers
-            
             // ВСЯ ОСТАЛЬНАЯ ЛОГИКА ПЕРЕЗАПУСКА, КОТОРАЯ УЖЕ РАБОТАЛА РАНЬШЕ:
             self.imageView.layer.borderWidth = 0
             self.imageView.layer.borderColor = nil
@@ -176,7 +167,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         let questionStep = QuizStepViewModel(
             image: UIImage(named: model.image) ?? UIImage(),
             question: model.text,
-            questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)"
+            questionNumber: "\(presenter.currentQuestionIndex + 1)/\(questionsAmount)"
         ) // 4
         return questionStep
     }
