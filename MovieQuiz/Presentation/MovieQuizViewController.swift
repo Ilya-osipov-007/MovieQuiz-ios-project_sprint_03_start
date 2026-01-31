@@ -1,17 +1,15 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
-    // переменная с индексом текущего вопроса, начальное значение 0
-    // (по этому индексу будем искать вопрос в массиве, где индекс первого элемента 0, а не 1)
-    private var currentQuestionIndex = 0
-    // переменная со счётчиком правильных ответов, начальное значение закономерно 0
-    private var correctAnswers = 0
+    private let presenter = Presenter()
+    private var alertPresenter = AlertPresenter()
+    private var statisticService: StatisticServiceProtocol = StatisticService()
     // приватный метод, который и меняет цвет рамки, и вызывает метод перехода
     // принимает на вход булевое значение и ничего не возвращает
     private func showAnswerResult(isCorrect: Bool) {
         // ВАЖНО: увеличиваем счетчик правильных ответов
         if isCorrect {
-            correctAnswers += 1
+            presenter.incrementCorrectAnswers()
         }
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
@@ -24,20 +22,22 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             self.showNextQuestionOrResults()
         }
     }
+    
+    
     // Приватный метод, который содержит логику перехода в один из сценариев
     // метод ничего не принимает и ничего не возвращает
     private func showNextQuestionOrResults() {
-        if currentQuestionIndex == questionsAmount - 1 {
-            let text = correctAnswers == questionsAmount ?
+        if presenter.currentQuestionIndex == questionsAmount - 1 {
+            let text = presenter.correctAnswers == 10 ?
                     "Поздравляем, вы ответили на 10 из 10!" :
-                    "Вы ответили на \(correctAnswers) из 10, попробуйте ещё раз!" // 1
+                    "Вы ответили на \(presenter.correctAnswers) из 10, попробуйте ещё раз!" // 1
             let viewModel = QuizResultsViewModel( // 2
                 title: "Этот раунд окончен!",
                 text: text,
                 buttonText: "Сыграть ещё раз")
             show(quiz: viewModel) // 3
         } else {
-            currentQuestionIndex += 1
+            presenter.currentQuestionIndex += 1
             questionFactory?.requestNextQuestion()
         }
     }
@@ -75,6 +75,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var questionFactory: QuestionFactoryProtocol?
     // Вопрос, который видит пользователь, опциоанльный т.к. может и не быть
     private var currentQuestion: QuizQuestion?
+    // Показ алерта презентер
+    
     
     
     // при первом запуске экрана
@@ -90,11 +92,14 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         
         // questionFactory = QuestionFactory(delegate: self)
         
-        let questionFactory = QuestionFactory() // 2
-        questionFactory.delegate = self         // 3
-        self.questionFactory = questionFactory  // 4
+        let questionFactory = QuestionFactory()
+        // Назначаем себя делегатом, чтобы получать вопросы обратно
+        questionFactory.delegate = self
+        // Сохраняем фабрику, чтобы вызывать её дальше
+        self.questionFactory = questionFactory
 
-        questionFactory.requestNextQuestion() // убрали ? в questionFactory
+        // Запрашиваем первый вопрос у фабрики
+        questionFactory.requestNextQuestion()
     }
     // MARK: - QuestionFactoryDelegate
     func didReceiveNextQuestion(question: QuizQuestion?) {
@@ -102,6 +107,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             return
         }
 
+        // Делегат получил вопрос и обновляет UI
         currentQuestion = question
         let viewModel = convert(model: question)
         
@@ -134,31 +140,34 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     // Приватный метод для показа алерта с результатами квиза
     // принимает вью модель QuizResultsViewModel и ничего не возвращает
-    private func show(quiz result: QuizResultsViewModel) {
-        let alert = UIAlertController(
-            title: result.title,
-            message: result.text,
-            preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in // слабая ссылка на self
-            guard let self = self else { return } // разворачиваем слабую ссылку
-            
-            self.currentQuestionIndex = 0
-            self.correctAnswers = 0
-            
-            questionFactory?.requestNextQuestion()
+    func show(quiz result: QuizResultsViewModel) {
+        statisticService.store(correct: presenter.correctAnswers, total: questionsAmount)
+        let bestGame = statisticService.bestGame
+        let message = """
+Ваш результат: \(presenter.correctAnswers)/\(questionsAmount)
+Количество сыгранных квизов: \(statisticService.gamesCount)
+Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))
+Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%
+"""
+        let model = AlertModel(title: result.title, message: message, buttonText: result.buttonText) { [weak self] in
+            guard let self = self else { return }
+            // Вызываем метод презентера
+            self.presenter.restartGame()
+            // ВСЯ ОСТАЛЬНАЯ ЛОГИКА ПЕРЕЗАПУСКА, КОТОРАЯ УЖЕ РАБОТАЛА РАНЬШЕ:
+            self.imageView.layer.borderWidth = 0
+            self.imageView.layer.borderColor = nil
+            self.enableButtons()
+            self.questionFactory?.requestNextQuestion()
         }
         
-        alert.addAction(action)
-        
-        self.present(alert, animated: true, completion: nil)
+        alertPresenter.show(in: self, model: model)
     }
     // приватный метод конвертации, который принимает моковый вопрос и возвращает вью модель для главного экрана
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         let questionStep = QuizStepViewModel(
             image: UIImage(named: model.image) ?? UIImage(),
             question: model.text,
-            questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)"
+            questionNumber: "\(presenter.currentQuestionIndex + 1)/\(questionsAmount)"
         ) // 4
         return questionStep
     }

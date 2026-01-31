@@ -47,9 +47,10 @@ class QuestionFactory: QuestionFactoryProtocol {
                 text: "Рейтинг этого фильма больше чем 6?",
                 correctAnswer: false)
         ]
+    // Делегат получает готовый вопрос. weak, чтобы не было retain cycle.
     weak var delegate: QuestionFactoryDelegate?
     
-    // Метод показа вопросов
+    // Запрашиваем следующий вопрос и передаём его делегату
     func requestNextQuestion() {
         guard let index = (0..<questions.count).randomElement() else {
             delegate?.didReceiveNextQuestion(question: nil)

@@ -5,6 +5,8 @@
 //  Created by Илья Геннадьевич on 03.01.2026.
 //
 // для состояния "Результат квиза"
+import Foundation
+
 struct QuizResultsViewModel {
     // строка с заголовком алерта
     let title: String

@@ -4,6 +4,8 @@
 //
 //  Created by Илья Геннадьевич on 03.01.2026.
 //
+import Foundation
+
 struct QuizQuestion {
   // строка с названием фильма,
   // совпадает с названием картинки афиши фильма в Assets
