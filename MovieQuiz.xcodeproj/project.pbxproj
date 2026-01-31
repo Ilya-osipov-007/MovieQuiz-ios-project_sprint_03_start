@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800692C22F2E2CE000B4D768 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800692C12F2E2CDB00B4D768 /* NetworkClient.swift */; };
+		800692C72F2E4B7500B4D768 /* MoviesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800692C62F2E4B7300B4D768 /* MoviesLoader.swift */; };
 		808103F12F1952D100CD22E0 /* PresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808103F02F1952CE00CD22E0 /* PresenterProtocol.swift */; };
 		808103F32F19532200CD22E0 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808103F22F19531F00CD22E0 /* Presenter.swift */; };
 		808103F52F1A2BF400CD22E0 /* StatisticServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808103F42F1A2BF000CD22E0 /* StatisticServiceProtocol.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		800692C12F2E2CDB00B4D768 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		800692C62F2E4B7300B4D768 /* MoviesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLoader.swift; sourceTree = "<group>"; };
 		808103F02F1952CE00CD22E0 /* PresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterProtocol.swift; sourceTree = "<group>"; };
 		808103F22F19531F00CD22E0 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		808103F42F1A2BF000CD22E0 /* StatisticServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticServiceProtocol.swift; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 		80E63D7B2F09A11B00FC0A1B /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				800692C62F2E4B7300B4D768 /* MoviesLoader.swift */,
+				800692C12F2E2CDB00B4D768 /* NetworkClient.swift */,
 				808103F42F1A2BF000CD22E0 /* StatisticServiceProtocol.swift */,
 				808103F02F1952CE00CD22E0 /* PresenterProtocol.swift */,
 				80E63D8C2F0D1D3E00FC0A1B /* QuestionFactoryDelegate.swift */,
@@ -239,9 +245,11 @@
 				80E63D7F2F09A23900FC0A1B /* QuestionFactory.swift in Sources */,
 				808103FA2F1A3BC000CD22E0 /* StatisticService.swift in Sources */,
 				AD77F5742857F8810062FB14 /* Date+Extensions.swift in Sources */,
+				800692C22F2E2CE000B4D768 /* NetworkClient.swift in Sources */,
 				AD1ABAB22831907B00B3E448 /* AppDelegate.swift in Sources */,
 				AD1ABAB42831907B00B3E448 /* SceneDelegate.swift in Sources */,
 				808103F12F1952D100CD22E0 /* PresenterProtocol.swift in Sources */,
+				800692C72F2E4B7500B4D768 /* MoviesLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
