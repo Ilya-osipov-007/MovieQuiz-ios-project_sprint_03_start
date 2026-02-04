@@ -13,12 +13,12 @@ final class MovieQuizPresenter: QuestionFactoryDelegate, PresenterProtocol {
     init() {
           // ничего не делаем, viewController и questionFactory пока nil
       }
-    init(viewController: MovieQuizViewController) {
-        self.viewController = viewController
+    init(viewController: MovieQuizViewControllerProtocol) {
+        weak var viewController: MovieQuizViewControllerProtocol?
         
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
         questionFactory?.loadData()
-        viewController.showLoadingIndicator()
+        viewController?.showLoadingIndicator()
     }
     
     func didLoadDataFromServer() {
