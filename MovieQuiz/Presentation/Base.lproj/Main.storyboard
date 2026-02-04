@@ -115,7 +115,7 @@
                                     <constraint firstItem="BZ8-4W-1CW" firstAttribute="top" secondItem="Lwh-ib-dpx" secondAttribute="bottom" constant="20" id="oCp-ta-3h4"/>
                                 </constraints>
                             </stackView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="lvF-si-8aT">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="lvF-si-8aT">
                                 <rect key="frame" x="197" y="427" width="20" height="9"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="Fqt-qE-Yrf"/>
@@ -128,9 +128,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lvF-si-8aT" secondAttribute="trailing" constant="197" id="HuE-1m-jgM"/>
                             <constraint firstItem="REt-hC-67A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Kh5-Lq-Qbn"/>
+                            <constraint firstItem="lvF-si-8aT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="197" id="fzL-Um-sXH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lvF-si-8aT" secondAttribute="bottom" constant="392" id="gaM-g8-5dv"/>
                             <constraint firstItem="REt-hC-67A" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-34" id="mhV-Md-ON7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="REt-hC-67A" secondAttribute="trailing" constant="20" id="nsK-pb-kXH"/>
+                            <constraint firstItem="lvF-si-8aT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="331" id="vgi-TT-OBk"/>
                             <constraint firstItem="REt-hC-67A" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="zO1-Ox-rmp"/>
                         </constraints>
                     </view>
