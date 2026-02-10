@@ -1,6 +1,15 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
+    func didLoadDataFromServer() {
+        activityIndicator.isHidden = true // скрываем индикатор загрузки
+        questionFactory?.requestNextQuestion()
+    }
+    
+    func didFailToLoadData(with error: Error) {
+        showNetworkError(message: error.localizedDescription) // возьмём в качестве сообщения описание ошибки
+    }
+    
     private let presenter = Presenter()
     private var alertPresenter = AlertPresenter()
     private var statisticService: StatisticServiceProtocol = StatisticService()
@@ -43,6 +52,32 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     
     // метод вызывается, когда пользователь нажимает на кнопку "Да"
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    private func showLoadingIndicator() {
+        activityIndicator.isHidden = false // говорим, что индикатор загрузки не скрыт
+        activityIndicator.startAnimating() // включаем анимацию
+    }
+    private func hideLoadingIndicator() {
+    activityIndicator.isHidden = true
+    activityIndicator.stopAnimating()
+    }
+
+    private func showNetworkError(message: String) {
+        hideLoadingIndicator()
+        
+        let model = AlertModel(title: "Ошибка",
+                               message: message,
+                               buttonText: "Попробовать еще раз") { [weak self] in
+            guard let self = self else { return }
+            
+            self.presenter.restartGame()
+            
+            self.questionFactory?.requestNextQuestion()
+        }
+        
+        alertPresenter.show(in: self, model: model)
+    }
+    
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         disableButtons()
         guard let currentQuestion = currentQuestion else {
@@ -92,14 +127,18 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         
         // questionFactory = QuestionFactory(delegate: self)
         
-        let questionFactory = QuestionFactory()
+        //let questionFactory = QuestionFactory()
+        questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
+        statisticService = StatisticService()
         // Назначаем себя делегатом, чтобы получать вопросы обратно
-        questionFactory.delegate = self
+        //questionFactory.delegate = self
         // Сохраняем фабрику, чтобы вызывать её дальше
-        self.questionFactory = questionFactory
+        //self.questionFactory = questionFactory
 
         // Запрашиваем первый вопрос у фабрики
-        questionFactory.requestNextQuestion()
+        //questionFactory.requestNextQuestion()
+        showLoadingIndicator()
+        questionFactory?.loadData()
     }
     // MARK: - QuestionFactoryDelegate
     func didReceiveNextQuestion(question: QuizQuestion?) {
@@ -164,12 +203,12 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     // приватный метод конвертации, который принимает моковый вопрос и возвращает вью модель для главного экрана
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
-        let questionStep = QuizStepViewModel(
-            image: UIImage(named: model.image) ?? UIImage(),
+        return QuizStepViewModel(
+            image: UIImage(data: model.image) ?? UIImage(),
             question: model.text,
             questionNumber: "\(presenter.currentQuestionIndex + 1)/\(questionsAmount)"
         ) // 4
-        return questionStep
+        //return questionStep
     }
     
     

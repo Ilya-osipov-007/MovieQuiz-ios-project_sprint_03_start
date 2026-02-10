@@ -115,6 +115,15 @@
                                     <constraint firstItem="BZ8-4W-1CW" firstAttribute="top" secondItem="Lwh-ib-dpx" secondAttribute="bottom" constant="20" id="oCp-ta-3h4"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="lvF-si-8aT">
+                                <rect key="frame" x="197" y="427" width="20" height="9"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="Fqt-qE-Yrf"/>
+                                    <constraint firstAttribute="height" constant="9" id="Z70-I4-UHZ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="dZg-bp-YPR"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" id="g3m-Yt-r6h"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
@@ -126,6 +135,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="lvF-si-8aT" id="84O-Hu-l6H"/>
                         <outlet property="counterLabel" destination="lKK-aP-i6P" id="uli-cI-yM3"/>
                         <outlet property="imageView" destination="BZ8-4W-1CW" id="fQE-1i-QQA"/>
                         <outlet property="noButton" destination="Be6-2a-bwM" id="1Qn-Xq-Zhd"/>
@@ -135,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-20" y="70"/>
+            <point key="canvasLocation" x="-20.289855072463769" y="69.642857142857139"/>
         </scene>
     </scenes>
     <resources>
